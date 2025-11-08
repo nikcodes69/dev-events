@@ -14,8 +14,10 @@ const Page = () => {
 
           <ul className="events">
 
-            {[1,2,3,4].map((event)=>(
-              <li key={event}>Event {event}</li>
+            {events.map((event)=>(
+              <li key={event.title}>
+                <EventCard {...event}/>
+              </li>
             ))}
                   
           </ul>
