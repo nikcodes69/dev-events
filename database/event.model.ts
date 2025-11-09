@@ -1,3 +1,4 @@
+import { File } from 'buffer';
 import { Schema, model, models, Document } from 'mongoose';
 
 // TypeScript interface for Event document
