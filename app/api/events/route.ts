@@ -16,6 +16,9 @@ export async function POST(req: NextRequest){
             return NextResponse.json({message: 'Image file is required'},{status: 400})
         }
 
+        const tags = JSON.parse(formData.get('tags') as string);
+        const agenda = JSON.parse(formData.get('agenda') as string);
+
         // Upload to Cloudinary first
         const arrayBuffer = await file.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
@@ -41,7 +44,11 @@ export async function POST(req: NextRequest){
         event.image = uploadResult.secure_url;
 
         // Now create the event in database
-        const createdEvent = await Event.create(event);
+        const createdEvent = await Event.create({
+            ...event,
+            tags : tags,
+            agenda : agenda
+        });
 
         return NextResponse.json({
             message: 'Event created successfully', 
